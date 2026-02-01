@@ -1,0 +1,25 @@
+name: Update Experience
+on:
+  schedule:
+    - cron: '0 0 1 1 *' # Runs every Jan 1st
+  workflow_dispatch: # Allows manual run
+
+jobs:
+  update-years:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Calculate Years
+        run: |
+          START_YEAR=2023
+          CURRENT_YEAR=$(date +%Y)
+          EXP=$((CURRENT_YEAR - START_YEAR))
+          sed -i "s/.*/$EXP/" README.md
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "Update experience to $EXP years" || exit 0
+          git push
+          
