@@ -1,10 +1,15 @@
 # 💫 About Me:
 
 I'm a Professional Android App Developer.
+
 I'm an Experienced Android App developer.
+
 I have 3 years and 2 monthsof experience.
+
 I'm making apps with architecture of MVVM and MVP.
+
 I'm making and MCP apps.
+
 
 ## 🌐 Socials:
 [![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white)](https://facebook.com/harsh.ukani.35) [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/25.ukaniii) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/https://www.linkedin.com/in/harsh-ukani) [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:harshukani93@gmail.com) 
