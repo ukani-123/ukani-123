@@ -1,25 +1,46 @@
 name: Update Experience
 on:
   schedule:
-    - cron: '0 0 1 1 *' # Runs every Jan 1st
+    - cron: '0 0 1 * *' # Runs on the 1st of every month
   workflow_dispatch: # Allows manual run
 
 jobs:
   update-years:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Calculate Years
+      - uses: actions/checkout@v3
+      - name: Calculate Experience
         run: |
+          # Define start date
+          START_MONTH=12
           START_YEAR=2023
-          CURRENT_YEAR=$(date +%Y)
-          EXP=$((CURRENT_YEAR - START_YEAR))
-          sed -i "s/.*/$EXP/" README.md
+
+          # Get current date
+          CUR_MONTH=$(date +%m)
+          CUR_YEAR=$(date +%Y)
+
+          # Calculate total months difference
+          TOTAL_MONTHS=$(( (CUR_YEAR - START_YEAR) * 12 + (10#$CUR_MONTH - START_MONTH) ))
+
+          # Calculate Years and Remaining Months
+          YEARS=$(( TOTAL_MONTHS / 12 ))
+          MONTHS=$(( TOTAL_MONTHS % 12 ))
+
+          # Create the string
+          if [ $MONTHS -eq 0 ]; then
+            EXP_STRING="$YEARS years"
+          else
+            EXP_STRING="$YEARS years and $MONTHS months "
+          fi
+
+          # Update the README.md using the marker tags
+          sed -i "s/.*/$EXP_STRING/" README.md
+
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add README.md
-          git commit -m "Update experience to $EXP years" || exit 0
+          git commit -m "Update experience to latest" || exit 0
           git push
           
